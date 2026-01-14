@@ -1,0 +1,220 @@
+@import 'tailwindcss' source(none);
+@source '../**/*.{js,ts,jsx,tsx}';
+
+@import 'tw-animate-css';
+
+/* Font faces */
+* {
+  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-display {
+  font-family: "Gasoek One", sans-serif;
+  letter-spacing: 0.05em;
+}
+
+/* Mobile optimizations */
+html, body {
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+}
+
+body {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Prevent pull-to-refresh */
+body {
+  overscroll-behavior-y: contain;
+}
+
+/* Imposter Game Animations */
+@keyframes breathe {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes pulse-tile {
+  0%, 100% { 
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% { 
+    transform: scale(1.05);
+    opacity: 0.85;
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-8px); }
+  20%, 40%, 60%, 80% { transform: translateX(8px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Glass morphism - enhanced for mobile */
+.glass-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 
+    0 8px 32px 0 rgba(0, 0, 0, 0.5),
+    inset 0 2px 4px 0 rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.glass-card:active {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(0.98);
+}
+
+/* Animated background - more vibrant */
+.animated-bg {
+  background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e, #0f3460, #0a0a0a);
+  background-size: 400% 400%;
+  animation: breathe 20s ease infinite;
+}
+
+/* Speaker card shimmer - enhanced */
+.speaker-card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+}
+
+.speaker-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+  pointer-events: none;
+}
+
+/* Tile animations */
+.animate-pulse-tile {
+  animation: pulse-tile 2s ease-in-out infinite;
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Confetti */
+.confetti-piece {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24, #6c5ce7);
+  top: -10px;
+  animation: confetti-fall linear forwards;
+  border-radius: 3px;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+.confetti-piece:nth-child(2n) {
+  background: linear-gradient(45deg, #a29bfe, #fd79a8, #fdcb6e);
+}
+
+.confetti-piece:nth-child(3n) {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.confetti-piece:nth-child(4n) {
+  width: 8px;
+  height: 16px;
+}
+
+/* Button styles - mobile optimized */
+.btn-primary {
+  min-height: 56px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.btn-primary:active {
+  transform: scale(0.96);
+}
+
+/* Player tile enhancements */
+.player-tile {
+  min-height: 80px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.player-tile:not(:disabled):active {
+  transform: scale(0.95);
+}
+
+/* Input styling for mobile */
+input, select {
+  -webkit-appearance: none;
+  appearance: none;
+  min-height: 48px;
+  font-size: 10px; /* Prevents zoom on iOS */
+}
+
+/* Smooth scrolling */
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    scroll-behavior: smooth;
+  }
+}
